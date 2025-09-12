@@ -9,6 +9,15 @@ This project showcases a complete end-to-end solution for building a modern data
 
 The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
 
+| Stage                                   | Object Type | Load Method                                    | Transformation                                  | Data Model                                | Usage                                                |
+| --------------------------------------- | ----------- | ---------------------------------------------- | ----------------------------------------------- | ----------------------------------------- | ---------------------------------------------------- |
+| **Sources (CRM, ERP)**                  | CSV Files   | Files in Folder                                | ❌ None                                          | N/A                                       | Data Ingestion                                       |
+| **Bronze (Raw Data)**                   | Tables      | Batch Processing, Full Load, Truncate & Insert | ❌ None                                          | As-is                                     | Staging Layer                                        |
+| **Silver (Cleaned, Standardized Data)** | Tables      | Batch Processing, Full Load, Truncate & Insert | ✔ Data Cleansing, Standardization, Enrichment   | None (As-is)                              | Curated Layer                                        |
+| **Gold (Business-Ready Data)**          | Views       | No Load                                        | ✔ Data Integration, Aggregation, Business Logic | Star Schema, Flat Table, Aggregated Table | Analytics Layer                                      |
+| **Consume**                             | N/A         | N/A                                            | N/A                                             | N/A                                       | BI & Reporting, Ad-hoc SQL Queries, Machine Learning |
+
+
 
 1. **Bronze Layer**: Stores raw data as-is from the source systems. Data is ingested from CSV Files into SQL Server Database.
 2. **Silver Layer**: This layer includes data cleansing, standardization, and normalization processes to prepare data for analysis.
